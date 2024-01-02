@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@500&display=swap');
+
+.card-container-div {
+  margin: 10px;
+  font-family: 'Dosis', sans-serif;
+  font-weight: normal;
+  border-radius: 10px;
+  background-color: var(--input-background-color);
+  transition: transform .2s;
+  overflow: visible;
+  padding: 5px;
+  padding-bottom: 3px;
+  height: fit-content;
+}
+
+.card-container-div h2 {
+  margin: 0;
+  padding: 0;
+  min-height: 50px;
+}
+
+.card-container-div h3 {
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+
+.card-container-div h4 {
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+  min-height: 60px;
+}
+
+.image-div {
+  max-width: 100%;
+}
+
+.card-image {
+  width: 100%;
+  max-height: 140px;
+  border-radius: 5px;
+}
+
+.card-container-div:hover {
+  background-color: var(--button-letters-color);
+  transform: scale(1.1);
+}

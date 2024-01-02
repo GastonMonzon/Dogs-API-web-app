@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+}
+
+.filters-container {
+    position: fixed;
+    top: 9.5%;
+    text-align: left;
+    width: 19%;
+    margin-left: 5px;
+}
+
+.order-button {
+    padding: 0;
+    margin: 0;
+}
+
+.toggle {
+    width: 40px;
+}
+
+.clear-button {
+    font-size: 12px;
+    height: 25px;
+}
+
+.info-container {
+    position: absolute;
+    top: 9%;
+    left: 20%;
+    overflow: hidden;
+}
+
+.pages-selector {
+  display: flex;
+  justify-content: center;
+  margin: 1.5%;
+}
+
+.page-button,
+.selected {
+  min-width: 2em;
+}
+
+.page-button:hover {
+  background-color: var(--hover-button-background-color);
+}
+
+.selected:hover {
+  background-color: var(--button-selected-color);
+}

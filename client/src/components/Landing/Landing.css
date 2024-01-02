@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@500&display=swap');
+
+.background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  object-fit: fill;
+  z-index: -1;
+}
+
+.second-background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  object-fit: fill;
+  z-index: -1;
+  display: none;
+}
+
+.title-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.titleSequence {
+  font-size: 120px;
+  font-family: 'Lilita One', sans-serif;
+  color: white;
+}
+
+.enter-button {
+  display: none;
+  position: absolute;
+  background: transparent;
+  color: black;
+  font-family: Dosis, sans-serif;
+  font-size: 25px;
+  box-shadow: 0 0px 5px;
+  top: 80%;
+  left: 48%;
+}
+
+.enter-button:hover {
+  color: white;
+}
+
+.first-label-transition {
+  color: black;
+}
+
+.first-video-transition {
+  display: none;
+}
+
+.second-label-transition {
+  color: white;
+}
+
+.background-transition {
+  background-color: black;
+}
+
+.third-label-transition {
+  background: url(../../assets/firstLandingBackground.gif) -20px -20px no-repeat;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 110% 100%;
+}
+
+.second-background-transition {
+  background: transparent;
+}
+
+.scale-down-center {
+  animation: scale-down-center 6s ease-out both;
+}
+
+.text-blur-out {
+	animation: text-blur-out 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+.video-blur-in {
+  display: flex;
+	animation: video-blur-in 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+.enter-button-blur-in {
+  display: flex;
+  animation: enter-button-blur-in 2s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+
+@keyframes scale-down-center {
+  0% {
+    transform: scale(70) translate(2%);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes text-blur-out {
+  0% {
+    filter: blur(0.01);
+  }
+  100% {
+    filter: blur(12px) opacity(0%);
+  }
+}
+
+@keyframes video-blur-in {
+  0% {
+    filter: blur(12px) opacity(0%);
+  }
+  100% {
+    filter: blur(0.01);
+  }
+}
+
+@keyframes enter-button-blur-in {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}

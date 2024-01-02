@@ -1,0 +1,112 @@
+.nav-bar {
+  display: flex;
+  position: fixed;
+  background: linear-gradient(157deg, rgba(0, 36, 0, 1) 0%, rgba(9, 121, 9, 1) 49%, rgba(10, 255, 0, 1) 100%);
+  width: 100vw;
+  height: 9%;
+  top: 0%;
+  left: 0%;
+  align-items: center;
+  z-index: 10;
+  justify-content: flex-start;
+}
+
+.menu-button,
+.home-button,
+.search-id-button,
+.toggle-metric-button {
+  width: 12vw;
+  height: 53px;
+  padding: 5px;
+  margin: 0 5px;
+  border-radius: 0;
+}
+
+
+.menu-button:hover,
+.home-button:hover {
+  background-color: var(--hover-left-menu-buttons);
+  color: var(--menu-button-letters-color);
+}
+
+.homeSearch {
+  width: 30vw;
+  height: 60%;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.homeIdSearch {
+  width: 3.5%;
+  height: 40%;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: var(--button-letters-color);
+  margin-left: 2%;
+}
+
+.toggle-metric-button {
+  margin-right: 25px;
+}
+
+.search-id-button:hover,
+.toggle-metric-button:hover {
+  color: var(--menu-button-letters-color);
+}
+
+.nav-bar input[type='search'] {
+  background-color: var(--button-letters-color);
+}
+
+.nav-right-buttons-container {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+}
+
+.dogs-per-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: flex-end;
+  text-align: center;
+  position: relative;
+  width: 12vw;
+  padding: 18px 5px;
+  padding-bottom: 0;
+}
+
+.dogs-per-page-container:hover {
+  background-color: var(--hover-button-background-color);
+  color: var(--menu-button-letters-color);
+  cursor: pointer;
+}
+
+.dogs-per-page-container label:hover {
+  color: var(--menu-button-letters-color);
+  cursor: pointer;
+}
+
+.dogs-per-page-options-button {
+  min-width: 2em;
+}
+
+.dogs-per-page-options-container {
+  position: absolute;
+  top: 100%;
+  right: 19.65%;
+  text-align: center;
+  background-color: var(--button-letters-color);
+  border-radius: 0 0 3px 3px;
+  color: var(--input-letters-color);
+}
+
+.dogs-per-page-options-button {
+  color: var(--input-letters-color);
+  border-radius: 0;
+}
+
+.selected-dogs-per-page {
+  background-color: var(--button-selected-color);
+  color: white;
+}

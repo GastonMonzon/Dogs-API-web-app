@@ -1,0 +1,64 @@
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: "Montserrat", Sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+  --menu-button-letters-color: rgb(255, 251, 0);
+  --hover-left-menu-buttons: rgb(15, 89, 0);
+  --hover-button-background-color: rgb(31, 185, 0);
+  --button-letters-color: rgb(255, 255, 255);
+  --input-background-color: rgba(255, 255, 255, 0.8);
+  --input-letters-color: rgb(0, 0, 0);
+  --button-selected-color: rgb(17, 102, 0);
+}
+
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+a:hover {
+  color: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  border: 0;
+  font-size: 1em;
+  background: transparent;
+  cursor: pointer;
+  color: var(--button-letters-color);
+  border-radius: 3px;
+}
+
+input {
+  border: 0;
+  border-radius: 3px;
+  background-color: var(--input-background-color);
+  color: var(--input-letters-color);
+}
+
+input:focus {
+  outline: 2px solid var(--hover-button-background-color);
+}
+
+label {
+  color: rgb(255, 255, 255);
+  border-radius: 3px;
+}
+
+button:hover {
+  background-color: var(--hover-button-background-color);
+  color: var(--button-letters-color);
+}
+
+.invisible {
+  visibility: hidden;
+}

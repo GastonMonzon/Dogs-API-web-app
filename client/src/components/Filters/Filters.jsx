@@ -42,6 +42,7 @@ export default function Filters() {
   const handleFilterChange = (event) => {
     const { id, value } = event.target;
     dispatch(filters({ name: id, value: value }));
+    dispatch(orderBy({ order: selectedOrder, isAscending: isAscending }));
   }
 
 

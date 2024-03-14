@@ -1,7 +1,7 @@
 import './Nav.css';
 import { NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { dogsPerPage, filters, searchByName, toggleMetric } from "../../redux/actions";
+import { dogsPerPage, filters, orderBy, searchByName, toggleMetric } from "../../redux/actions";
 import { dogsPerPageOptions } from '../../config';
 import { useState } from 'react';
 
@@ -9,12 +9,21 @@ export default function Nav() {
   const homeSearchInput = useSelector((state) => state.homeSearchInput);
   const selectedDogsPerPage = useSelector((state) => state.selectedDogsPerPage);
   const metric = useSelector((state) => state.metric);
+  const selectedOrder = useSelector((state) => state.selectedOrder);
+  const isAscending = useSelector((state) => state.isAscending);
   const [isDogsPerPageFocused, setIsDogsPerPageFocused] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
 
   const handleSearch = (value) => {
-    dispatch(searchByName(value));
+    dispatch(searchByName(value))
+      .then(() => {
+        dispatch(filters({ name: '', value: '' }));
+        dispatch(orderBy({ order: selectedOrder, isAscending: isAscending }));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   const handleDogsPerPageFocus = () => {
     setIsDogsPerPageFocused(true);
@@ -30,6 +39,7 @@ export default function Nav() {
   const handleToggleMetric = () => {
     dispatch(toggleMetric());
     dispatch(filters({ name: '', value: '' }));
+    dispatch(orderBy({ order: selectedOrder, isAscending: isAscending }));
   }
 
   return (

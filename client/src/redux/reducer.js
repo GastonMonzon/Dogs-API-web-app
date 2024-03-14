@@ -48,7 +48,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         searchedDogs: action.payload.dogs,
-        filteredDogs: action.payload.dogs,
         homeNameSearch: action.payload.search
       }
     case SELECT_DOGS_PER_PAGE:
@@ -182,7 +181,6 @@ const reducer = (state = initialState, action) => {
       }
       let filterTemp = [...state.searchedDogs];
       if (state.homeFilteredTemperaments.length > 0) {
-        console.log(state.homeFilteredTemperaments);
         filterTemp = filterTemp.filter((dog) => {
           return dog.temperament.some((temperament) =>
             state.homeFilteredTemperaments.includes(temperament)

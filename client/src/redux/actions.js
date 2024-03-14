@@ -10,13 +10,15 @@ export const setAllTemperaments = (temperaments) => {
 export const searchByName = (dog) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios(`http://localhost:3001/dogs/query/?name=${dog}`);
-      return dispatch({ type: SEARCH_DOG_BY_NAME, payload: { dogs: data, search: dog } });
+      const { data } = await axios.get(`http://localhost:3001/dogs/query/?name=${dog}`);
+      dispatch({ type: SEARCH_DOG_BY_NAME, payload: { dogs: data, search: dog } });
+      return data;
     } catch (error) {
       console.log(error);
+      throw error;
     }
-  }
-}
+  };
+};
 export const dogsPerPage = (value) => {
   return { type: SELECT_DOGS_PER_PAGE, payload: value };
 }

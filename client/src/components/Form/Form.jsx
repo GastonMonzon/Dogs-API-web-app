@@ -1,5 +1,5 @@
 import './Form.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import validation from './validation';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchTemperament } from '../../redux/actions';
@@ -24,6 +24,13 @@ export default function Form() {
     minWeight: '', maxWeight: '', minHeight: '', maxHeight: '', image: '', temperament: ''
   });
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setErrors(
+      validation({
+        ...dogData
+      }, metric));
+  }, [metric]);
 
   const handleInputChange = (event) => {
     const { id, value } = event.target;
@@ -168,7 +175,6 @@ export default function Form() {
         name: '', bredFor: '', breedGroup: '', origin: '', lifeSpan: '', minlifeSpan: '', minWeight: '', maxWeight: '',
         minHeight: '', maxHeight: '', image: '', temperament: ''
       });
-      console.log(response);
       window.alert('Dog breed created succesfully');
     } catch (error) {
       console.error(error);

@@ -14,6 +14,7 @@ async function deleteTemperaments(request, response) {
     }
     response.status(200).send({ deletedCount, message: 'temperament deleted successfully' });
   } catch (error) {
+    console.error(error);
     response.status(500).send({ error, message: 'Error at deleating temperament' });
   }
 }

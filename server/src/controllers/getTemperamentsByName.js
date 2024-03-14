@@ -11,7 +11,9 @@ async function getTemperamentsByName(request, response) {
     });
     response.status(200).json(temperaments);
   } catch (error) {
-    response.status(404).send({ error, message: 'Error at searching temperaments by name'});
+    console.error(error);
+    response.status(404).send({ error, message: 'Error at searching temperaments by name' });
+    
   }
 }
 

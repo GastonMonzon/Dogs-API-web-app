@@ -50,9 +50,10 @@ async function postDogs(request, response) {
       await dog.setTemperaments(allTemperaments);
     }
     const updatedDog = await Dog.findByPk(dog.id, { include: Temperament });
-    response.status(201).json({updatedDog,  message: 'Dog created succesfully' });
+    response.status(201).json({ updatedDog, message: 'Dog created succesfully' });
   } catch (error) {
-    response.status(404).send({ error, message: 'Error at posting a new dog'});
+    console.error(error);
+    response.status(404).send({ error, message: 'Error at posting a new dog' });
   }
 }
 

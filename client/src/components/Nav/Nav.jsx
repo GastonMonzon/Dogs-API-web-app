@@ -1,41 +1,21 @@
 import './Nav.css';
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { dogsPerPage, filters, searchByName, toggleMetric } from "../../redux/actions";
 import { dogsPerPageOptions } from '../../config';
-import React, { useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 
 export default function Nav() {
   const homeSearchInput = useSelector((state) => state.homeSearchInput);
   const selectedDogsPerPage = useSelector((state) => state.selectedDogsPerPage);
   const metric = useSelector((state) => state.metric);
   const [isDogsPerPageFocused, setIsDogsPerPageFocused] = useState(false);
-  const [idSearchInput, setIdSearchInput] = useState('');
   const dispatch = useDispatch();
   const location = useLocation();
-  const navigate = useNavigate();
 
   const handleSearch = (value) => {
     dispatch(searchByName(value));
   }
-  const handleIDChange = (value) => {
-    setIdSearchInput(value);
-  }
-  const handleIDSearch = async (dogId) => {
-    if (dogId !== '') {
-    try {
-      const { data } = await axios(`http://localhost:3001/dogs/${dogId}`);
-      if (data.name) {
-        navigate(`detail/${dogId}`);
-      }
-    } catch (error) {
-        window.alert('¡No hay personajes con este ID!');
-        console.error(error);
-    }
-  }
-}
-
   const handleDogsPerPageFocus = () => {
     setIsDogsPerPageFocused(true);
   }
@@ -65,12 +45,13 @@ export default function Nav() {
             </NavLink>
           )}
           {location.pathname === '/home' && (
-            <>
-              <input className='homeSearch' type="search" name="search" placeholder="Search Name" value={homeSearchInput} onChange={(event) => handleSearch(event.target.value)} />
-              <input className='homeIdSearch' type="number" name="search" placeholder="ID" value={idSearchInput}
-                onChange={(event) => handleIDChange(event.target.value)} />
-              <button  className='search-id-button' onClick={() => handleIDSearch(idSearchInput)} >Search</button>
-            </>
+            <input
+              className='homeSearch'
+              type="search"
+              name="search"
+              placeholder="Search Name"
+              value={homeSearchInput}
+              onChange={(event) => handleSearch(event.target.value)} />
           )}
           <div className='nav-right-buttons-container' >
             {location.pathname === '/home' && (
@@ -92,20 +73,16 @@ export default function Nav() {
               </div>)}
             <div className={`dogs-per-page-options-container ${isDogsPerPageFocused ? '' : 'invisible'}`} key='dogs-per-page-options-container' >
               {dogsPerPageOptions.options.map((perPage) => {
-                const dogsPerPageClassName = `dogs-per-page-options-button ${perPage === selectedDogsPerPage ? 'selected-dogs-per-page' : ''}`;
                 return (
-                  <React.Fragment key={perPage}>
-                    <div>
-                      <button
-                        key={perPage}
-                        id={perPage}
-                        className={dogsPerPageClassName}
-                        value={perPage}
-                        onClick={handleDogsPerPage} >
-                        {perPage}
-                      </button>
-                    </div>
-                  </React.Fragment>
+                  <div key={perPage} >
+                    <button
+                      id={perPage}
+                      className={`dogs-per-page-options-button ${perPage === selectedDogsPerPage ? 'selected-dogs-per-page' : ''}`}
+                      value={perPage}
+                      onClick={handleDogsPerPage} >
+                      {perPage}
+                    </button>
+                  </div>
                 )
               })}
             </div>

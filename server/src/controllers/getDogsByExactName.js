@@ -14,6 +14,7 @@ async function getDogsByExactName(request, response) {
     }
     response.status(200).json(dog);
   } catch (error) {
+    console.error(error);
     response.status(500).send({ error, message: 'Error at searching dog by exact name'});
   }
 }

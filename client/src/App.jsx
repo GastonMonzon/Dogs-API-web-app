@@ -19,7 +19,7 @@ export default function App() {
   useEffect(() => {
     (async function fetchDogs() {
       try {
-        const { data } = await axios(`${import.meta.env.RAILWAY}/dogs`);
+        const { data } = await axios(`https://dogs-api-web-app-production.up.railway.app/dogs`);
         dispatch(setAllDogs(data));
       } catch (error) {
         console.error('Error retrieving dogs:', error);
@@ -29,7 +29,7 @@ export default function App() {
   useEffect(() => {
     (async function fetchTemperaments() {
       try {
-        const { data } = await axios(`${import.meta.env.RAILWAY}/temperaments`);
+        const { data } = await axios(`https://dogs-api-web-app-production.up.railway.app/temperaments`);
         dispatch(setAllTemperaments(data));
       } catch (error) {
         console.error('Error retrieving temperaments:', error);

@@ -9,7 +9,7 @@ export default function Detail() {
   const metric = useSelector((state) => state.metric);
 
   useEffect(() => {
-    fetch(`${import.meta.env.RAILWAY}/dogs/${id}`)
+    fetch(`https://dogs-api-web-app-production.up.railway.app/dogs/${id}`)
       .then((response) => response.json())
       .then((data) => {
         data.bredFor = data.bredFor.split(',');

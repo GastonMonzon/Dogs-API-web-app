@@ -10,7 +10,7 @@ export const setAllTemperaments = (temperaments) => {
 export const searchByName = (dog) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`${import.meta.env.RAILWAY}/dogs/query/?name=${dog}`);
+      const { data } = await axios.get(`https://dogs-api-web-app-production.up.railway.app/dogs/query/?name=${dog}`);
       dispatch({ type: SEARCH_DOG_BY_NAME, payload: { dogs: data, search: dog } });
       return data;
     } catch (error) {
@@ -25,7 +25,7 @@ export const dogsPerPage = (value) => {
 export const searchTemperament = (temperament, isHome) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios(`${import.meta.env.RAILWAY}/temperaments/query/?name=${temperament}`);
+      const { data } = await axios(`https://dogs-api-web-app-production.up.railway.app/temperaments/query/?name=${temperament}`);
       if (isHome) {
         return dispatch({ type: HOME_SEARCH_TEMPERAMENT, payload: { temperaments: data, search: temperament } });
       }

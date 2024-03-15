@@ -9,7 +9,7 @@ export default function Detail() {
   const metric = useSelector((state) => state.metric);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/dogs/${id}`)
+    fetch(`${import.meta.env.RAILWAY}/dogs/${id}`)
       .then((response) => response.json())
       .then((data) => {
         data.bredFor = data.bredFor.split(',');

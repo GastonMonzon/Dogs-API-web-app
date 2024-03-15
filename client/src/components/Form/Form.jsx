@@ -162,7 +162,7 @@ export default function Form() {
     }
 
     try {
-      await axios.post(`http://localhost:3001/dogs`, {
+      await axios.post(`${import.meta.env.RAILWAY}/dogs`, {
         name, bredFor, breedGroup, lifeSpanString, minlifeSpan, maxlifeSpan, temperament, origin, metricWeightString,
         minMetricWeight, maxMetricWeight, imperialWeightString, minImperialWeight, maxImperialWeight, metricHeightString,
         minMetricHeight, maxMetricHeight, imperialHeightString, minImperialHeight, maxImperialHeight, image

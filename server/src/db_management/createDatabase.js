@@ -1,6 +1,9 @@
+require('dotenv').config();
 const { Sequelize } = require('sequelize');
 
-const sequelAccess = new Sequelize(`postgres://postgres:123456@localhost:5432`, {
+const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+
+const sequelAccess = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@localhost:${DB_HOST}`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
@@ -15,7 +18,7 @@ async function checkDatabaseExists() {
     return false;
   }
 }
-(async function createDatabaseIfNotExists() {
+async function createDatabase() {
   try {
     const databaseExists = await checkDatabaseExists();
     if (databaseExists) {
@@ -27,4 +30,6 @@ async function checkDatabaseExists() {
   } catch (error) {
     console.error('Error creating database:', error);
   }
-})();
+}
+
+module.exports = createDatabase;

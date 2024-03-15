@@ -3,9 +3,13 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
-const { DB_USER, DB_PASSWORD, DB_HOST, API_KEY } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, API_KEY, DB_DEPLOY } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@localhost:${DB_HOST}/dogs`, {
+// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@localhost:${DB_HOST}/dogs`, {
+//   logging: false,
+//   native: false,
+// });
+const sequelize = new Sequelize(DB_DEPLOY, {
   logging: false,
   native: false,
 });
@@ -40,99 +44,8 @@ Temperament.belongsToMany(Dog, { through: 'Dog_temperament' });
     console.error('Unable to connect to the database:', error);
   }
 })();
-(async function createTables() {
-  try {
-    await sequelize.sync();
-    console.log('Tables created successfully.');
-    const dogCount = await Dog.count();
-    const temperamentCount = await Temperament.count();
-    if (dogCount === 0 && temperamentCount === 0) {
-      await populateTables();
-      console.log('Tables populated successfully.');
-    } else {
-      console.log('Tables are not empty. Skipping population.');
-    }
-  } catch (error) {
-    console.error('Error creating tables:', error);
-  }
-})();
-async function populateTables() {
-  try {
-    const { data } = await axios(`https://api.thedogapi.com/v1/breeds/?api_key=${API_KEY}`);
-    const temperaments = [];
-    data.forEach((dog) => {
-      const { id, name, bred_for, breed_group, life_span, temperament, origin, weight, height, image } = dog;
-      const lifeSpanArray = life_span.match(/\d+/g);
 
-      let metricWeightString;
-      const metricWeightRange = weight.metric.match(/(\d+(\.\d+)?)/g);
-      let metricWeightArray = metricWeightRange?.map(Number);
-      if (metricWeightArray?.length === 1) {
-        metricWeightString = toString(metricWeightArray[0]);
-      } else {
-        metricWeightString = weight.metric;
-      }
-
-      const imperialWeightString = weight.imperial;
-      const imperialWeightRange = weight.imperial.match(/(\d+(\.\d+)?)/g);
-      const imperialWeightArray = imperialWeightRange?.map(Number);
-
-      const metricHeightString = height.metric;
-      const metricHeightRange = height.metric.match(/(\d+(\.\d+)?)/g);
-      const metricHeightArray = metricHeightRange?.map(Number);
-
-      const imperialHeightString = height.imperial;
-      const imperialHeightRange = height.imperial.match(/(\d+(\.\d+)?)/g);
-      const imperialHeightArray = imperialHeightRange?.map(Number);
-
-      if (!metricWeightRange) {
-        metricWeightString = imperialWeightRange?.map(weight => Math.ceil(Number(weight) * 0.453592))[0];
-        metricWeightArray = imperialWeightRange?.map(weight => Math.ceil(Number(weight) * 0.453592));
-      }
-      const imageUrl = image.url;
-
-      let temperamentArray = temperament ? temperament.split(", ") : [];
-      temperamentArray = temperamentArray.map(item => item === 'Hard-working' ? 'Hardworking' : item);
-      temperamentArray.forEach((temp) => {
-        if (!temperaments.includes(temp)) temperaments.push(temp);
-      })
-      Dog.create({
-        id: id,
-        name: name,
-        bredFor: bred_for || null,
-        breedGroup: breed_group || null,
-        lifeSpanString: life_span || null,
-        minlifeSpan: lifeSpanArray[0] || null,
-        maxlifeSpan: lifeSpanArray[1] || lifeSpanArray[0] || null,
-        temperament: temperamentArray || null,
-        origin: origin || null,
-        metricWeightString: (metricWeightString + ' kg') || null,
-        minMetricWeight: metricWeightArray[0] || null,
-        maxMetricWeight: metricWeightArray[1] || metricWeightArray[0] || null,
-        imperialWeightString: (imperialWeightString + ' lb') || null,
-        minImperialWeight: imperialWeightArray[0] || null,
-        maxImperialWeight: imperialWeightArray[1] || imperialWeightArray[0] || null,
-        metricHeightString: (metricHeightString + ' cm') || null,
-        minMetricHeight: metricHeightArray[0] || null,
-        maxMetricHeight: metricHeightArray[1] || metricHeightArray[0] || null,
-        imperialHeightString: (imperialHeightString + ' in') || null,
-        minImperialHeight: imperialHeightArray[0] || null,
-        maxImperialHeight: imperialHeightArray[1] || imperialHeightArray[0] || null,
-        image: imageUrl || null,
-        source: 'API'
-      });
-    });
-    temperaments.forEach(temp => {
-      Temperament.create({
-        name: temp
-      })
-    });
-  } catch (error) {
-    console.error('Error obtaining data:', error);
-  }
-}
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize, // para importar la conexión { conn } = require('./db.js');
-  apiKey: API_KEY
 };

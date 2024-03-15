@@ -2,7 +2,6 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const axios = require('axios');
 const { DB_USER, DB_PASSWORD, DB_HOST, API_KEY, DB_DEPLOY } = process.env;
 
 // const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@localhost:${DB_HOST}/dogs`, {
@@ -40,6 +39,7 @@ Temperament.belongsToMany(Dog, { through: 'Dog_temperament' });
   try {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
+    console.log(DB_DEPLOY);
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }

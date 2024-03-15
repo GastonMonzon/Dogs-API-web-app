@@ -16,26 +16,26 @@ export default function App() {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  useEffect(() => {
-    (async function fetchDogs() {
-      try {
-        const { data } = await axios('http://localhost:3001/dogs');
-        dispatch(setAllDogs(data));
-      } catch (error) {
-        console.error('Error retrieving dogs:', error);
-      }
-    })();
-  }, [dispatch]);
-  useEffect(() => {
-    (async function fetchTemperaments() {
-      try {
-        const { data } = await axios('http://localhost:3001/temperaments');
-        dispatch(setAllTemperaments(data));
-      } catch (error) {
-        console.error('Error retrieving temperaments:', error);
-      }
-    })();
-  }, [dispatch]);
+  // useEffect(() => {
+  //   (async function fetchDogs() {
+  //     try {
+  //       const { data } = await axios('http://localhost:3001/dogs');
+  //       dispatch(setAllDogs(data));
+  //     } catch (error) {
+  //       console.error('Error retrieving dogs:', error);
+  //     }
+  //   })();
+  // }, [dispatch]);
+  // useEffect(() => {
+  //   (async function fetchTemperaments() {
+  //     try {
+  //       const { data } = await axios('http://localhost:3001/temperaments');
+  //       dispatch(setAllTemperaments(data));
+  //     } catch (error) {
+  //       console.error('Error retrieving temperaments:', error);
+  //     }
+  //   })();
+  // }, [dispatch]);
 
   return (
     <div className='app'>

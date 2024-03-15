@@ -39,7 +39,6 @@ Temperament.belongsToMany(Dog, { through: 'Dog_temperament' });
   try {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
-    console.log(DB_DEPLOY);
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }
